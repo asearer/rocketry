@@ -186,6 +186,17 @@ def main():
         # Update rocket
         rocket.update()
 
+        # TODO: Implement realistic physics
+        # TODO: Implement multiple rockets
+        # TODO: Add visual effects
+        # TODO: Add interactive controls
+        # TODO: Implement targeted landings
+        # TODO: Integrate sound effects
+        # TODO: Develop a graphical user interface
+        # TODO: Allow customization of rocket design
+        # TODO: Create scenarios and challenges
+        # TODO: Implement data logging
+
         # Display Launch button
         draw_button("Launch", font, (0, 100, 0), launch_button_rect)
 
@@ -231,4 +242,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
