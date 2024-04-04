@@ -26,7 +26,7 @@ clock = pygame.time.Clock()
 # Load rocket image
 rocket_image = pygame.image.load("rocket.png")
 # Scale down the rocket image
-rocket_image = pygame.transform.scale(rocket_image, (175, 175))  # Adjust the size as needed
+rocket_image = pygame.transform.scale(rocket_image, (150, 150))  # Adjust the size as needed
 
 # Font for text
 font = pygame.font.Font(None, 36)
@@ -108,21 +108,20 @@ def main():
 
         screen.fill(WHITE)
 
-        # Display input fields
-        velocity_rect = pygame.draw.rect(screen, (0, 0, 0), (100, 100, 200, 50), 2)
-        acceleration_rect = pygame.draw.rect(screen, (0, 0, 0), (100, 200, 200, 50), 2)
-
+        # Display text and input fields
         draw_text("Rocket Velocity:", font, (0, 0, 0), 10, 110)
+        velocity_rect = pygame.draw.rect(screen, (0, 0, 0), (100, 140, 100, 30), 2)  # Adjusted x-coordinate
         if velocity_active:
-            draw_text(input_velocity, font, (0, 0, 0), 105, 110)
+            draw_text(input_velocity, font, (0, 0, 0), 105, 150)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_velocity, font, (0, 0, 0), 105, 110)
+            draw_text(rocket_velocity, font, (0, 0, 0), 105, 150)  # Adjusted x-coordinate
 
         draw_text("Rocket Acceleration:", font, (0, 0, 0), 10, 210)
+        acceleration_rect = pygame.draw.rect(screen, (0, 0, 0), (100, 240, 100, 30), 2)  # Adjusted x-coordinate
         if acceleration_active:
-            draw_text(input_acceleration, font, (0, 0, 0), 105, 210)
+            draw_text(input_acceleration, font, (0, 0, 0), 105, 250)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_acceleration, font, (0, 0, 0), 105, 210)
+            draw_text(rocket_acceleration, font, (0, 0, 0), 105, 250)  # Adjusted x-coordinate
 
         # Update rocket
         rotated_rocket = pygame.transform.rotate(rocket_image, rocket.angle)
