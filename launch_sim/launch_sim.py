@@ -40,11 +40,13 @@ class Rocket:
         self.acceleration = acceleration
         self.angle = angle
         self.thrust = thrust
+        self.launched = False
 
     def update(self):
-        self.velocity += self.acceleration
-        self.y -= self.velocity * math.sin(math.radians(self.angle))
-        self.x += self.velocity * math.cos(math.radians(self.angle))
+        if self.launched:
+            self.velocity += self.acceleration
+            self.y -= self.velocity * math.sin(math.radians(self.angle))
+            self.x += self.velocity * math.cos(math.radians(self.angle))
 
 # Function to display text
 def draw_text(text, font, color, x, y):
@@ -126,6 +128,7 @@ def main():
                         rocket.acceleration = float(rocket_acceleration)
                         rocket.angle = float(rocket_angle)
                         rocket.thrust = float(rocket_thrust)
+                        rocket.launched = True
                     except ValueError:
                         pass
             elif event.type == pygame.MOUSEMOTION:
@@ -228,3 +231,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
