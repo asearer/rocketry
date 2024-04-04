@@ -37,11 +37,13 @@ font = pygame.font.Font(None, 36)
 
 # Function to display text
 def draw_text(text, font, color, x, y):
+    """Render and draw text on the screen."""
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, (x, y))
 
 # Main loop
 def main():
+    """Main function to run the rocket simulation."""
     rocket = Rocket(WIDTH // 2, HEIGHT)  # Default position
 
     rocket_velocity = ""
