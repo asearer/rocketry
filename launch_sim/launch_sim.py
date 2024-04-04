@@ -33,7 +33,7 @@ font = pygame.font.Font(None, 36)
 
 # Rocket class
 class Rocket:
-    def __init__(self, x, y, velocity, acceleration, angle, thrust):
+    def __init__(self, x, y, velocity=5, acceleration=0.1, angle=90, thrust=1):
         self.x = x
         self.y = y
         self.velocity = velocity
@@ -75,7 +75,7 @@ def main():
     angle_active = False
     thrust_active = False
 
-    rocket = Rocket(WIDTH // 2, HEIGHT, 0, 0, 90, 0)  # Initial angle set to 90 degrees
+    rocket = Rocket(WIDTH // 2, HEIGHT, 5, 0.1, 90, 1)  # Initial angle set to 90 degrees
     running = True
 
     # Define input field rectangles
@@ -180,6 +180,9 @@ def main():
 
         screen.fill(WHITE)
 
+        # Update rocket
+        rocket.update()
+
         # Display Launch button
         draw_button("Launch", font, (0, 100, 0), launch_button_rect)
 
@@ -188,32 +191,32 @@ def main():
         if velocity_active:
             draw_text(input_velocity, font, (0, 0, 0), 105, 150)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_velocity, font, (0, 0, 0), 105, 150)  # Adjusted x-coordinate
+            draw_text(str(rocket.velocity), font, (0, 0, 0), 105, 150)  # Adjusted x-coordinate
         pygame.draw.rect(screen, (0, 0, 0), velocity_rect, 2)
 
         draw_text("Rocket Acceleration:", font, (0, 0, 0), 10, 210)
         if acceleration_active:
             draw_text(input_acceleration, font, (0, 0, 0), 105, 250)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_acceleration, font, (0, 0, 0), 105, 250)  # Adjusted x-coordinate
+            draw_text(str(rocket.acceleration), font, (0, 0, 0), 105, 250)  # Adjusted x-coordinate
         pygame.draw.rect(screen, (0, 0, 0), acceleration_rect, 2)
 
         draw_text("Rocket Angle:", font, (0, 0, 0), 10, 310)
         if angle_active:
             draw_text(input_angle, font, (0, 0, 0), 105, 350)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_angle, font, (0, 0, 0), 105, 350)  # Adjusted x-coordinate
+            draw_text(str(rocket.angle), font, (0, 0, 0), 105, 350)  # Adjusted x-coordinate
         pygame.draw.rect(screen, (0, 0, 0), angle_rect, 2)
 
         draw_text("Rocket Thrust:", font, (0, 0, 0), 10, 410)
         if thrust_active:
             draw_text(input_thrust, font, (0, 0, 0), 105, 450)  # Adjusted x-coordinate
         else:
-            draw_text(rocket_thrust, font, (0, 0, 0), 105, 450)  # Adjusted x-coordinate
+            draw_text(str(rocket.thrust), font, (0, 0, 0), 105, 450)  # Adjusted x-coordinate
         pygame.draw.rect(screen, (0, 0, 0), thrust_rect, 2)
 
-        # Update rocket
-        rotated_rocket = pygame.transform.rotate(rocket_image, rocket.angle)
+        # Display rocket
+        rotated_rocket = pygame.transform.rotate(rocket_image, -rocket.angle)
         rocket_rect = rotated_rocket.get_rect(center=(rocket.x, rocket.y))
         screen.blit(rotated_rocket, rocket_rect)
 
@@ -225,4 +228,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
