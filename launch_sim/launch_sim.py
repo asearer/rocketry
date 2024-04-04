@@ -26,7 +26,7 @@ clock = pygame.time.Clock()
 # Load rocket image
 rocket_image = pygame.image.load("rocket.png")
 # Scale down the rocket image
-rocket_image = pygame.transform.scale(rocket_image, (150, 150))  # Adjust the size as needed
+rocket_image = pygame.transform.scale(rocket_image, (150, 150))  # Adjust the size as needed 150 is good for demo
 
 # Font for text
 font = pygame.font.Font(None, 36)
@@ -50,6 +50,13 @@ def draw_text(text, font, color, x, y):
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, (x, y))
 
+# Function to draw button
+def draw_button(text, font, color, rect):
+    pygame.draw.rect(screen, color, rect)
+    text_surface = font.render(text, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(center=rect.center)
+    screen.blit(text_surface, text_rect)
+
 # Main loop
 def main():
     rocket_velocity = ""
@@ -62,6 +69,9 @@ def main():
 
     rocket = Rocket(WIDTH // 2, HEIGHT, 0, 0, 90)  # Initial angle set to 90 degrees
     running = True
+
+    # Define launch button rectangle
+    launch_button_rect = pygame.Rect(10, 70, 120, 30)
 
     while running:
         for event in pygame.event.get():
@@ -78,6 +88,14 @@ def main():
                 else:
                     velocity_active = False
                     acceleration_active = False
+                # Check if mouse click is within launch button
+                if launch_button_rect.collidepoint(event.pos):
+                    # Launch the rocket with current parameters
+                    try:
+                        rocket.velocity = float(rocket_velocity)
+                        rocket.acceleration = float(rocket_acceleration)
+                    except ValueError:
+                        pass
             elif event.type == pygame.MOUSEMOTION:
                 # Check if mouse is being dragged to adjust angle
                 if pygame.mouse.get_pressed()[0]:  # Left mouse button
@@ -86,7 +104,7 @@ def main():
                 if velocity_active:
                     if event.key == pygame.K_RETURN:
                         try:
-                            rocket.velocity = float(input_velocity)
+                            rocket_velocity = input_velocity
                             input_velocity = ""
                         except ValueError:
                             pass
@@ -97,7 +115,7 @@ def main():
                 if acceleration_active:
                     if event.key == pygame.K_RETURN:
                         try:
-                            rocket.acceleration = float(input_acceleration)
+                            rocket_acceleration = input_acceleration
                             input_acceleration = ""
                         except ValueError:
                             pass
@@ -107,6 +125,9 @@ def main():
                         input_acceleration += event.unicode
 
         screen.fill(WHITE)
+
+        # Display Launch button
+        draw_button("Launch", font, (0, 100, 0), launch_button_rect)
 
         # Display text and input fields
         draw_text("Rocket Velocity:", font, (0, 0, 0), 10, 110)
