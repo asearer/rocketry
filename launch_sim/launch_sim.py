@@ -33,7 +33,7 @@ font = pygame.font.Font(None, 36)
 
 # Rocket class
 class Rocket:
-    def __init__(self, x, y, velocity=5, acceleration=0.1, angle=90, thrust=1):
+    def __init__(self, x, y, velocity=5, acceleration=0.1, angle=0.0, thrust=1):
         self.x = x
         self.y = y
         self.velocity = velocity
@@ -77,7 +77,7 @@ def main():
     angle_active = False
     thrust_active = False
 
-    rocket = Rocket(WIDTH // 2, HEIGHT, 5, 0.1, 90, 1)  # Initial angle set to 90 degrees
+    rocket = Rocket(WIDTH // 2, HEIGHT, 5, 0.1, 0.0, 1)  # Initial angle set to 0.0 degrees
     running = True
 
     # Define input field rectangles
@@ -242,5 +242,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
